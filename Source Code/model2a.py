@@ -24,7 +24,7 @@ spark = SparkSession.builder.appName("Jupyter 190501 Bias + ALS Recommendation")
 print("done with Spark configuration")
 
 # read in dataset to RDD
-allData = spark.read.text("/Users/felix/Downloads/ratings_Books1.csv").rdd
+allData = spark.read.text("ratings.csv").rdd
 
 print('done with read in dataset to RDD')
 
@@ -66,11 +66,11 @@ allDataDF.show()
 print('done with drop bookId userId timestamp from allDataDF')
 
 #split into train, validation and test
-trainDF = allDataDF#.filter('time BETWEEN 0 AND 9999')
-valDF = allDataDF#.filter('time BETWEEN 9000 AND 9999')
+#trainDF = allDataDF#.filter('time BETWEEN 0 AND 9999')
+#valDF = allDataDF#.filter('time BETWEEN 9000 AND 9999')
 
-#trainDF = allDataDF.filter("time BETWEEN 0 AND 20256439").cache() # 90% of 22507155
-#valDF = allDataDF.filter("time BETWEEN 20256440 AND 22507154") # 10% of 22507155
+trainDF = allDataDF.filter("time BETWEEN 0 AND 20256439").cache() # 90% of 22507155
+valDF = allDataDF.filter("time BETWEEN 20256440 AND 22507154") # 10% of 22507155
 
 
 #print(trainDF.count())
