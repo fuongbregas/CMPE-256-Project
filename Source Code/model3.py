@@ -44,7 +44,6 @@ allDataDF = spark.createDataFrame(allDataRDD)
 
 print("done with create allDataDF")
 
-# convert user and item ids into integer so ALS is happy
 stringIndexer = StringIndexer(inputCol="userId", outputCol="userIdNum")
 model = stringIndexer.fit(allDataDF)
 allDataDF = model.transform(allDataDF)
